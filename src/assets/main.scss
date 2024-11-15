@@ -1,0 +1,11 @@
+@use "./reset.scss";
+
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Geist Mono", sans-serif;
+}
+
