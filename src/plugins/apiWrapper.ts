@@ -1,10 +1,11 @@
 import axios from "axios"
 
-const baseURL = import.meta.env.VITE_API_URL as string
+const isDevelopment = import.meta.env.MODE === "development"
+
+const baseURL = isDevelopment ? "/api" : import.meta.env.VITE_API_URL
 
 const axiosInstance = axios.create({
   baseURL,
-  withCredentials: true,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

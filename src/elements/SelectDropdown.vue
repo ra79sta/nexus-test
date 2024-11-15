@@ -18,7 +18,7 @@ import { ref, onMounted, onUnmounted } from "vue"
 
 interface Option {
   value: string | number
-  label: string
+  label: string | number
 }
 
 const props = defineProps<{
@@ -77,18 +77,27 @@ onUnmounted(() => {
     box-sizing: border-box;
     margin-bottom: 3px;
   }
-  .option:hover {
-    background-color: #3b3636;
-  }
-  .option {
-    padding: 10px;
+  .options-wrapper {
+    position: absolute;
+    width: 100%;
     border: 1px solid #ccc;
-    box-sizing: border-box;
-    cursor: pointer;
-  }
-  .option:last-of-type {
+    background: #000000;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    max-height: 375px;
+    overflow-y: auto;
+    .option:hover {
+      background-color: #3b3636;
+    }
+    .option {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+    .option:last-of-type {
+      border-bottom: none;
+    }
   }
 }
 .slide-fade-enter-active {

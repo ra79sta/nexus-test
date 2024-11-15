@@ -3,7 +3,9 @@ import { ref, onMounted } from "vue"
 import { useVehicleStore } from "@/stores/vehicleStore"
 import SelectDropdown from "@/elements/SelectDropdown.vue"
 
-const options = ref([])
+type Option = { value: string | number; label: string | number }
+
+const options = ref<Option[]>([])
 
 const options2 = ref([
   { value: 1, label: "Option 1" },
@@ -24,9 +26,11 @@ const selectedOption3 = ref("")
 const vehicleStore = useVehicleStore()
 
 onMounted(async () => {
-  const res = await vehicleStore.fetchYears()
-  console.log("res", res)
-  // options.value = vehicleStore.years.map((year) => ({ value: year, label: year }))
+  await vehicleStore.fetchYears()
+  options.value = vehicleStore.years.map((year: { year: string | number }) => ({
+    value: year.year,
+    label: year.year,
+  }))
 })
 </script>
 
