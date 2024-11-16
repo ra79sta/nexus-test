@@ -1,9 +1,10 @@
 import axios from "axios"
 
-const isDevelopment = import.meta.env.MODE === "development"
+// const isDevelopment = import.meta.env.MODE === "development"
 console.log("import.meta.env.MODE", import.meta.env.MODE)
 
-const baseURL = isDevelopment ? "/api" : import.meta.env.VITE_API_URL
+// const baseURL = isDevelopment ? "/api" : import.meta.env.VITE_API_URL
+const baseURL = "/api"
 
 const axiosInstance = axios.create({
   baseURL,

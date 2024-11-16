@@ -16,7 +16,7 @@ export const useVehicleStore = defineStore("vehicleStore", {
       this.error = null
       try {
         this.years = await vehicleService.getYears()
-        console.log("okida li se", this.years)
+        console.log("years", this.years)
       } catch (error: unknown) {
         if (error instanceof Error) {
           this.error = error.message || "Failed to fetch years."
