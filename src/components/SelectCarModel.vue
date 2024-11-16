@@ -90,9 +90,9 @@ watch(selectedOptionMake, async (make) => {
 
 <style scoped lang="scss">
 .wrapper {
-  display: flex;
+  display: grid;
   gap: 2rem;
-  justify-content: space-evenly;
+  grid-template-columns: repeat(3, 1fr);
   h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
