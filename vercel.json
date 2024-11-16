@@ -4,9 +4,5 @@
       "source": "/api/(.*)",
       "destination": "https://rateengine.ship.cars/$1"
     }
-    // {
-    //     "source": "/(.*)",
-    //     "destination": "/"
-    // }
   ]
 }
