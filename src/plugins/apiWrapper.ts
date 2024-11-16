@@ -12,6 +12,17 @@ const axiosInstance = axios.create({
   },
 })
 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    console.log("Request:", config)
+    return config
+  },
+  (error) => {
+    console.error("Request error:", error)
+    return Promise.reject(error)
+  },
+)
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
