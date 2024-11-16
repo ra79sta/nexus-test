@@ -4,8 +4,17 @@ import vehicleService from "@/services/vehicleService"
 export const useVehicleStore = defineStore("vehicleStore", {
   state: () => ({
     years: [] as { year: string | number }[],
-    makes: [] as string[],
-    models: [] as string[],
+    makes: [] as { make: string }[],
+    models: [] as {
+      vehicle_id: string
+      type: string
+      vehicle_type: string
+      body_type: string
+      year: number
+      make: string
+      model: string
+      original_model: string
+    }[],
     loading: false,
     error: null as string | null,
   }),
@@ -16,7 +25,6 @@ export const useVehicleStore = defineStore("vehicleStore", {
       this.error = null
       try {
         this.years = await vehicleService.getYears()
-        console.log("years", this.years)
       } catch (error: unknown) {
         if (error instanceof Error) {
           this.error = error.message || "Failed to fetch years."

@@ -27,6 +27,7 @@ const props = defineProps<{
   name: string
   placeholder?: string
   modelValue: string | number
+  disabled?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -38,6 +39,7 @@ const selectedOption = ref(props.modelValue)
 const isDropdownOpen = ref(false)
 
 const toggleDropdown = () => {
+  if (props.disabled) return
   isDropdownOpen.value = !isDropdownOpen.value
 }
 
