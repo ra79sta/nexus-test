@@ -2,10 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://rateengine.ship.cars/$1",
-      "has": ["headers"],
-      "statusCode": 307
-
+      "destination": "https://rateengine.ship.cars/$1"
     }
   ]
 }
