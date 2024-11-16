@@ -1,6 +1,7 @@
-import { IncomingMessage, ServerResponse } from "http"
+import type { VercelRequest } from "@vercel/node"
+import type { VercelResponse } from "@vercel/node"
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   const targetUrl = `https://rateengine.ship.cars${req.url}`
 
   const sanitizedHeaders: Record<string, string> = {}
@@ -14,8 +15,8 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
 
   let body = ""
   if (req.method !== "GET" && req.method !== "HEAD") {
-    req.on("data", (chunk) => {
-      body += chunk
+    req.on("data", (chunk: Buffer) => {
+      body += chunk.toString()
     })
 
     req.on("end", async () => {
@@ -23,15 +24,13 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
         const response = await fetch(targetUrl, {
           method: req.method,
           headers: sanitizedHeaders,
-          body: body ? body : undefined, // Ako postoji telo, prosleđujemo ga
+          body: body ? body : undefined,
         })
 
         const data = await response.text()
-        res.statusCode = response.status
-        res.end(data)
+        res.status(response.status).send(data)
       } catch (error) {
-        res.statusCode = 500
-        res.end(
+        res.status(500).send(
           JSON.stringify({
             error: "Error connecting to API",
             details: (error as Error).message,
@@ -47,11 +46,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       })
 
       const data = await response.text()
-      res.statusCode = response.status
-      res.end(data)
+      res.status(response.status).send(data)
     } catch (error) {
-      res.statusCode = 500
-      res.end(
+      res.status(500).send(
         JSON.stringify({
           error: "Error connecting to API",
           details: (error as Error).message,
