@@ -11,18 +11,4 @@
       "path": "./tsconfig.vitest.json"
     }
   ],
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "moduleResolution": "node"
-  },
-  "include": [
-    "api/**/*.ts"
-  ]
 }
