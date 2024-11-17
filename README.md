@@ -24,7 +24,7 @@ Add in /etc/hosts `nexus.local` for 127.0.0.1
 127.0.0.1       localhost nexus.local
 ```
 
-## Installation
+### Installation
 
 ```sh
 pnpm install
