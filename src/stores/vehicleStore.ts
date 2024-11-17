@@ -19,6 +19,14 @@ export const useVehicleStore = defineStore("vehicleStore", {
     error: null as string | null,
   }),
 
+  getters: {
+    getYears: (state) => state.years,
+    getMakes: (state) => state.makes,
+    getModels: (state) => state.models,
+    isLoading: (state) => state.loading,
+    getError: (state) => state.error,
+  },
+
   actions: {
     async fetchYears() {
       this.loading = true

@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue"
+import { ref, onMounted, onUnmounted, watch } from "vue"
 
 interface Option {
   value: string | number
@@ -54,7 +54,12 @@ const closeDropdown = (event: MouseEvent) => {
     isDropdownOpen.value = false
   }
 }
-
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    selectedOption.value = newValue
+  },
+)
 onMounted(() => {
   window.addEventListener("click", closeDropdown)
 })
@@ -67,15 +72,15 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .dropdown-wrapper {
   position: relative;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   width: 100%;
   margin: 0 auto;
   .dropdown-selected-option {
-    padding: 12px;
+    padding: 0.8rem;
     border: 1px solid #ccc;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 0.6rem;
     box-sizing: border-box;
     margin-bottom: 3px;
   }
@@ -84,8 +89,8 @@ onUnmounted(() => {
     width: 100%;
     border: 1px solid #ccc;
     background: #000000;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
     max-height: 375px;
     overflow-y: auto;
     .option:hover {
@@ -103,10 +108,10 @@ onUnmounted(() => {
   }
 }
 .slide-fade-enter-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,
