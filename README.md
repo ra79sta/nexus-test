@@ -16,6 +16,16 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+### Set new domain in your hosts file
+
+Add in /etc/hosts `nexus.local` for 127.0.0.1
+
+```sh
+127.0.0.1       localhost nexus.local
+```
+
+## Installation
+
 ```sh
 pnpm install
 ```
