@@ -1,54 +1,34 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from "vue"
-import { useVehicleStore } from "@/stores/vehicleStore"
+import { useVehicleData } from "@/composables/useVehicleData"
 import SelectDropdown from "@/elements/SelectDropdown.vue"
 
-type YearOption = { value: string | number; label: string | number }
-type MakeOption = { value: string; label: string }
-type ModelOption = { value: string; label: string }
+const { years, makes, models, error, fetchYears, fetchMakes, fetchModels, resetModels } = useVehicleData()
 
-const yearsOptions = ref<YearOption[]>([])
+const selectedOptionYear = ref<string | number>("")
+const selectedOptionMake = ref<string>("")
+const selectedOptionModel = ref<string>("")
 
-const makeOptions = ref<MakeOption[]>([])
-
-const modelOptions = ref<ModelOption[]>([])
-
-const selectedOptionYear = ref("")
-const selectedOptionMake = ref("")
-const selectedOptionModel = ref("")
-
-const isYearDropdownDisabled = computed(() => yearsOptions.value.length === 0)
-const isMakeDropdownDisabled = computed(() => makeOptions.value.length === 0)
-const isModelDropdownDisabled = computed(() => modelOptions.value.length === 0)
-
-const vehicleStore = useVehicleStore()
+const isYearDropdownDisabled = computed(() => years.value.length === 0)
+const isMakeDropdownDisabled = computed(() => makes.value.length === 0)
+const isModelDropdownDisabled = computed(() => models.value.length === 0)
 
 onMounted(async () => {
-  await vehicleStore.fetchYears()
-  yearsOptions.value = vehicleStore.years.map((year: { year: string | number }) => ({
-    value: year.year,
-    label: year.year,
-  }))
+  await fetchYears()
 })
+
 watch(selectedOptionYear, async (year) => {
   if (year) {
-    await vehicleStore.fetchMakes(year)
-    makeOptions.value = vehicleStore.makes.map((make: { make: string }) => ({
-      value: make.make,
-      label: make.make,
-    }))
+    await fetchMakes(year.toString())
     selectedOptionMake.value = ""
     selectedOptionModel.value = ""
-    modelOptions.value = []
+    resetModels()
   }
 })
+
 watch(selectedOptionMake, async (make) => {
   if (make) {
-    await vehicleStore.fetchModels(selectedOptionYear.value, make)
-    modelOptions.value = vehicleStore.models.map((model: { model: string }) => ({
-      value: model.model,
-      label: model.model,
-    }))
+    await fetchModels(selectedOptionYear.value.toString(), make)
     selectedOptionModel.value = ""
   }
 })
@@ -61,8 +41,8 @@ watch(selectedOptionMake, async (make) => {
       <div class="option-choose-wrapper">
         <h1>Select Year</h1>
         <select-dropdown
-          name="mySelect"
-          :options="yearsOptions"
+          name="yearSelect"
+          :options="years"
           v-model="selectedOptionYear"
           placeholder="Select Year"
           :disabled="isYearDropdownDisabled"
@@ -74,8 +54,8 @@ watch(selectedOptionMake, async (make) => {
       <div class="option-choose-wrapper">
         <h1>Select Make</h1>
         <select-dropdown
-          name="mySelect"
-          :options="makeOptions"
+          name="makeSelect"
+          :options="makes"
           v-model="selectedOptionMake"
           placeholder="Select Make"
           :disabled="isMakeDropdownDisabled"
@@ -87,8 +67,8 @@ watch(selectedOptionMake, async (make) => {
       <div class="option-choose-wrapper">
         <h1>Select Model</h1>
         <select-dropdown
-          name="mySelect"
-          :options="modelOptions"
+          name="modelSelect"
+          :options="models"
           v-model="selectedOptionModel"
           placeholder="Select Model"
           :disabled="isModelDropdownDisabled"
@@ -98,6 +78,7 @@ watch(selectedOptionMake, async (make) => {
         </p>
       </div>
     </div>
+    <p class="error" v-if="!error">{{ error }}</p>
   </div>
 </template>
 
@@ -109,7 +90,7 @@ watch(selectedOptionMake, async (make) => {
   gap: 2rem;
   .head-text {
     font-size: 2rem;
-    color: rgb(241, 241, 129);
+    color: #f1f181;
   }
   .select-wrapper {
     display: grid;
@@ -118,7 +99,7 @@ watch(selectedOptionMake, async (make) => {
     h1 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: rgb(241, 241, 129);
+      color: #f1f181;
     }
     .option-choose-wrapper {
       display: flex;
@@ -126,12 +107,15 @@ watch(selectedOptionMake, async (make) => {
       margin-bottom: 2rem;
       align-items: start;
       .selected-value {
-        color: rgb(241, 241, 129);
+        color: #f1f181;
       }
       p {
-        color: rgb(216, 216, 194);
+        color: #d8d8c2;
       }
     }
+  }
+  .error {
+    color: #ea0808;
   }
 }
 </style>

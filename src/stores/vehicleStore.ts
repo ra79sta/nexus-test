@@ -75,5 +75,13 @@ export const useVehicleStore = defineStore("vehicleStore", {
         this.loading = false
       }
     },
+
+    resetMakes() {
+      this.makes = []
+    },
+
+    resetModels() {
+      this.models = []
+    },
   },
 })

@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown-wrapper" ref="dropDown">
-    <div class="dropdown-selected-option" @click="toggleDropdown">
+    <div class="dropdown-selected-option" :class="{ disabled: props.disabled }" @click="toggleDropdown">
       {{ selectedOption || placeholder }}
     </div>
     <transition name="slide-fade">
@@ -78,16 +78,20 @@ onUnmounted(() => {
   margin: 0 auto;
   .dropdown-selected-option {
     padding: 0.8rem;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     cursor: pointer;
     border-radius: 0.6rem;
     box-sizing: border-box;
     margin-bottom: 3px;
   }
+  .dropdown-selected-option.disabled {
+    cursor: not-allowed;
+    color: #827c7c;
+  }
   .options-wrapper {
     position: absolute;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     background: #000000;
     border-bottom-left-radius: 0.6rem;
     border-bottom-right-radius: 0.6rem;
@@ -98,7 +102,7 @@ onUnmounted(() => {
     }
     .option {
       padding: 10px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #cccccc;
       box-sizing: border-box;
       cursor: pointer;
     }
