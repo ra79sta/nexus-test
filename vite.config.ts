@@ -29,14 +29,14 @@ export default defineConfig(({ command }) => {
       ...options,
       server: {
         host: "nexus.local",
-        proxy: {
-          "/api": {
-            target: "https://rateengine.ship.cars",
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, ""),
-            secure: false,
-          },
-        },
+        //   proxy: {
+        //     "/api": {
+        //       target: "https://new.api.nexusautotransport.com/",
+        //       changeOrigin: true,
+        //       rewrite: (path) => path.replace(/^\/api/, ""),
+        //       secure: false,
+        //     },
+        //   },
       },
       plugins: [...options.plugins, mkcert()],
     }

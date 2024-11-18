@@ -10,15 +10,15 @@ export const useVehicleData = () => {
 
   const years = computed<YearOption[]>(() =>
     vehicleStore.getYears.map((year) => ({
-      value: year.year,
-      label: year.year,
+      value: year,
+      label: year,
     })),
   )
 
   const makes = computed<MakeOption[]>(() =>
     vehicleStore.getMakes.map((make) => ({
-      value: make.make,
-      label: make.make,
+      value: make.name,
+      label: make.name,
     })),
   )
 

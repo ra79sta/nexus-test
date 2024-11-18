@@ -1,37 +1,26 @@
 import apiInstance from "@/plugins/apiWrapper"
 
-export interface Year {
-  year: string | number
-}
+export type Year = string
 
-export interface Make {
-  make: string
-}
+export type Make = { id: number; name: string }
 
-export interface VehicleModel {
-  vehicle_id: string
-  type: string
-  vehicle_type: string
-  body_type: string
-  year: number
-  make: string
-  model: string
-  original_model: string
-}
+export type VehicleModel = { model: string }
+
+const VEHICLE_API_PATH = "api/vehicles/"
 
 export default {
   async getYears(): Promise<Year[]> {
-    const response = await apiInstance.get(`v2/vehicles/years/`)
-    return response.data
+    const response = await apiInstance.get(`${VEHICLE_API_PATH}years`)
+    return response.data.data
   },
 
   async getMakes(year: string): Promise<Make[]> {
-    const response = await apiInstance.get(`v2/vehicles/makes/?year=${year}`)
-    return response.data
+    const response = await apiInstance.get(`${VEHICLE_API_PATH}makes?year=${year}`)
+    return response.data.data
   },
 
   async getModels(year: string, make: string): Promise<VehicleModel[]> {
-    const response = await apiInstance.get(`v2/vehicles/models/?year=${year}&make=${make}`)
-    return response.data
+    const response = await apiInstance.get(`${VEHICLE_API_PATH}models?year=${year}&make=${make}`)
+    return response.data.data
   },
 }
