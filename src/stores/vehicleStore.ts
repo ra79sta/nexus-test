@@ -3,18 +3,9 @@ import vehicleService from "@/services/vehicleService"
 
 export const useVehicleStore = defineStore("vehicleStore", {
   state: () => ({
-    years: [] as { year: string | number }[],
-    makes: [] as { make: string }[],
-    models: [] as {
-      vehicle_id: string
-      type: string
-      vehicle_type: string
-      body_type: string
-      year: number
-      make: string
-      model: string
-      original_model: string
-    }[],
+    years: [] as string[],
+    makes: [] as { id: number; name: string }[],
+    models: [] as { model: string }[],
     loading: false,
     error: null as string | null,
   }),
