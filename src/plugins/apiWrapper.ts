@@ -10,6 +10,9 @@ const axiosInstance = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
   },
+  params: {
+    token: import.meta.env.VITE_API_URL_TOKEN,
+  },
 })
 
 axiosInstance.interceptors.response.use(

@@ -1,11 +1,12 @@
 @use "./reset.scss";
+@import "colors";
 
 html,
 body,
 #root {
   height: 100%;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: $Black;
+  color: $White;
   font-family: "Geist Mono", sans-serif;
 }
 

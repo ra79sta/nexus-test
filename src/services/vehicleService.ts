@@ -19,21 +19,19 @@ export interface VehicleModel {
   original_model: string
 }
 
-const API_TOKEN = import.meta.env.VITE_API_URL_TOKEN as string
-
 export default {
   async getYears(): Promise<Year[]> {
-    const response = await apiInstance.get(`v2/vehicles/years/?token=${API_TOKEN}`)
+    const response = await apiInstance.get(`v2/vehicles/years/`)
     return response.data
   },
 
   async getMakes(year: string): Promise<Make[]> {
-    const response = await apiInstance.get(`v2/vehicles/makes/?year=${year}&token=${API_TOKEN}`)
+    const response = await apiInstance.get(`v2/vehicles/makes/?year=${year}`)
     return response.data
   },
 
   async getModels(year: string, make: string): Promise<VehicleModel[]> {
-    const response = await apiInstance.get(`v2/vehicles/models/?year=${year}&make=${make}&token=${API_TOKEN}`)
+    const response = await apiInstance.get(`v2/vehicles/models/?year=${year}&make=${make}`)
     return response.data
   },
 }

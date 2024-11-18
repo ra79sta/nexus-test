@@ -83,6 +83,8 @@ watch(selectedOptionMake, async (make) => {
 </template>
 
 <style scoped lang="scss">
+@import "../assets/colors.scss";
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -90,16 +92,19 @@ watch(selectedOptionMake, async (make) => {
   gap: 2rem;
   .head-text {
     font-size: 2rem;
-    color: #f1f181;
+    color: $AppYellow;
   }
   .select-wrapper {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    border: 1px solid $LightGray;
+    padding: 2rem 1rem;
+    border-radius: 0.5rem;
     h1 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: #f1f181;
+      color: $AppYellow;
     }
     .option-choose-wrapper {
       display: flex;
@@ -107,15 +112,15 @@ watch(selectedOptionMake, async (make) => {
       margin-bottom: 2rem;
       align-items: start;
       .selected-value {
-        color: #f1f181;
+        color: $AppYellow;
       }
       p {
-        color: #d8d8c2;
+        color: $Gray;
       }
     }
   }
   .error {
-    color: #ea0808;
+    color: $ErrorRed;
   }
 }
 </style>

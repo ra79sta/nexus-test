@@ -70,15 +70,16 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@import "../assets/colors.scss";
+
 .dropdown-wrapper {
   position: relative;
-  padding-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
   margin: 0 auto;
   .dropdown-selected-option {
     padding: 0.8rem;
-    border: 1px solid #cccccc;
+    border: 1px solid $LightGray;
     cursor: pointer;
     border-radius: 0.6rem;
     box-sizing: border-box;
@@ -86,23 +87,24 @@ onUnmounted(() => {
   }
   .dropdown-selected-option.disabled {
     cursor: not-allowed;
-    color: #827c7c;
+    color: $Disabled;
   }
   .options-wrapper {
     position: absolute;
     width: 100%;
-    border: 1px solid #cccccc;
-    background: #000000;
+    border: 1px solid $LightGray;
+    background: $Black;
     border-bottom-left-radius: 0.6rem;
     border-bottom-right-radius: 0.6rem;
-    max-height: 375px;
+    max-height: 250px;
     overflow-y: auto;
+    z-index: 10;
     .option:hover {
-      background-color: #3b3636;
+      background-color: $DarkGray;
     }
     .option {
       padding: 10px;
-      border-bottom: 1px solid #cccccc;
+      border-bottom: 1px solid $LightGray;
       box-sizing: border-box;
       cursor: pointer;
     }
