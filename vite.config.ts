@@ -9,7 +9,7 @@ import mkcert from "vite-plugin-mkcert"
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
   const options = {
-    plugins: [vue(), vueJsx(), vueDevTools()],
+    plugins: [vue(), vueJsx()],
     css: {
       preprocessorOptions: {
         scss: {
@@ -29,16 +29,8 @@ export default defineConfig(({ command }) => {
       ...options,
       server: {
         host: "nexus.local",
-        //   proxy: {
-        //     "/api": {
-        //       target: "https://new.api.nexusautotransport.com/",
-        //       changeOrigin: true,
-        //       rewrite: (path) => path.replace(/^\/api/, ""),
-        //       secure: false,
-        //     },
-        //   },
       },
-      plugins: [...options.plugins, mkcert()],
+      plugins: [...options.plugins, mkcert(), vueDevTools()],
     }
   }
 
