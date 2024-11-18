@@ -24,7 +24,6 @@ const API_TOKEN = import.meta.env.VITE_API_URL_TOKEN as string
 export default {
   async getYears(): Promise<Year[]> {
     const response = await apiInstance.get(`v2/vehicles/years/?token=${API_TOKEN}`)
-    console.log("response", response)
     return response.data
   },
 
