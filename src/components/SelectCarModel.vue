@@ -78,7 +78,7 @@ watch(selectedOptionMake, async (make) => {
         </p>
       </div>
     </div>
-    <p class="error" v-if="!error">{{ error }}</p>
+    <p class="error" v-if="error">{{ error }}</p>
   </div>
 </template>
 
